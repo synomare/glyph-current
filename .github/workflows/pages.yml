@@ -33,9 +33,6 @@ jobs:
       - name: Run source tests
         run: npm test
 
-      - name: Verify extracted engine
-        run: npm run check:engine
-
       - name: Build site
         run: npm run build
 

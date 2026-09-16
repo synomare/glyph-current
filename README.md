@@ -35,7 +35,7 @@ The public site is deployed from this repository with GitHub Pages:
 
 <https://synomare.github.io/glyph-current/>
 
-Every push to `main` runs the source tests and engine extraction check, builds the static site, and deploys the generated `dist/` artifact through `.github/workflows/pages.yml`. The compiled `dist/` directory is deliberately not committed.
+Every push to `main` runs the source tests, builds the static site, and deploys the generated `dist/` artifact through `.github/workflows/pages.yml`. The compiled `dist/` directory is deliberately not committed. The engine extraction check remains a local maintainer check because it compares the committed engine snapshot with the separate Type Deformer source checkout.
 
 ## What is included
 
