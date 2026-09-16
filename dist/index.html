@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f2f1ed" />
+    <meta name="description" content="文字をほどき、捩り、流れへ変える6つの線的字形オペレーター。" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 16c6-14 18 14 24 0' fill='none' stroke='%232758d7' stroke-width='3'/%3E%3C/svg%3E" />
+    <title>GLYPH CURRENT</title>
+    <script type="module" crossorigin src="./assets/index-C5P52cC_.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-anlpN1NE.css">
+  </head>
+  <body>
+    <main id="app" class="app" aria-busy="true">
+      <header class="masthead chrome">
+        <button class="wordmark" id="brandButton" type="button" aria-label="表示を全体に戻す">
+          <span>Glyph Current</span>
+        </button>
+        <div class="head-actions">
+          <button class="text-button" id="fullscreenButton" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg><span>Focus</span></button>
+          <button class="text-button is-primary" id="exportButton" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15V3m0 0L8 7m4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span>Export</span></button>
+        </div>
+      </header>
+
+      <section class="stage" id="stage" aria-label="字形プレビュー">
+        <canvas id="previewCanvas"></canvas>
+        <button class="fit-button chrome" id="fitButton" type="button" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg><span>Fit</span></button>
+        <div class="render-status chrome" id="renderStatus" role="status" aria-live="polite">
+          <span class="status-dot"></span><span id="statusText">ENGINE STARTING</span>
+          <button id="cancelButton" type="button" hidden>CANCEL</button>
+        </div>
+      </section>
+
+      <nav class="operator-rail chrome" aria-label="Operator selection">
+        <button id="operatorMenuButton" class="rail-trigger" type="button" aria-label="エフェクトを選択" aria-expanded="false" aria-controls="operatorMenu">
+          <span class="rail-count"><span id="operatorNumber">01</span><span aria-hidden="true">/</span><span>06</span></span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </nav>
+
+      <aside class="operator-menu chrome" id="operatorMenu" aria-label="6 Operators" hidden></aside>
+      <aside class="details-panel chrome" id="detailsPanel" aria-label="Detailed controls" hidden>
+        <div class="panel-heading">
+          <div><span class="panel-index" id="detailsIndex">01 / 06</span><h2 id="detailsTitle">LIQUID ROPE</h2></div>
+          <button class="icon-button" id="closeDetailsButton" type="button" aria-label="詳細を閉じる"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        </div>
+        <div class="preset-switch" role="group" aria-label="設定の強さ">
+          <button type="button" data-preset="quiet">Quiet</button>
+          <button type="button" data-preset="wild">Wild</button>
+        </div>
+        <div id="parameterControls" class="parameter-controls"></div>
+        <div class="details-meta">
+          <label class="color-field">Ink <input id="inkColor" type="color" value="#151515" /></label>
+          <label class="color-field">Paper <input id="paperColor" type="color" value="#f2f1ed" /></label>
+          <label class="file-button">Import font<input id="fontInput" type="file" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" /></label>
+          <select id="fontFamily" aria-label="書体">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', serif">Times New Roman</option>
+            <option value="'Yu Mincho', 'YuMincho', serif">Yu Mincho</option>
+            <option value="'Yu Gothic', 'YuGothic', sans-serif">Yu Gothic</option>
+          </select>
+        </div>
+      </aside>
+
+      <footer class="control-bar chrome">
+        <label class="text-entry">
+          <span>Text</span>
+          <textarea id="textInput" rows="1" autocomplete="off" spellcheck="false" aria-label="Text">SYNOMARE</textarea>
+        </label>
+        <button class="operator-readout" id="operatorReadout" type="button">
+          <span id="activeVerb">巻く</span><strong id="activeOperator">LIQUID ROPE</strong>
+        </button>
+        <label class="primary-control" for="primaryInput">
+          <span class="primary-readout"><span id="primaryLabel">Coil</span><output id="primaryValue">0.140</output></span>
+          <input id="primaryInput" type="range" min="0.025" max="0.35" step="0.005" value="0.14" aria-label="Coil" />
+        </label>
+        <div class="bar-actions">
+          <button class="icon-button" id="undoButton" type="button" aria-label="元に戻す" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 7 4 12l5 5M5 12h8a6 6 0 0 1 6 6"/></svg></button>
+          <button class="icon-button" id="redoButton" type="button" aria-label="やり直す" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 7 5 5-5 5m4-5h-8a6 6 0 0 0-6 6"/></svg></button>
+          <button class="details-button" id="detailsButton" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6"/></svg><span>Details</span></button>
+        </div>
+      </footer>
+
+      <dialog id="exportDialog" class="export-dialog">
+        <form method="dialog" class="export-sheet">
+          <div class="panel-heading">
+            <div><h2>Export</h2></div>
+            <button class="icon-button" value="cancel" aria-label="書き出しを閉じる"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+          <label class="dialog-row">Scale
+            <select id="exportScale"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select>
+          </label>
+          <label class="dialog-row check-row"><input id="exportBackground" type="checkbox" checked /> Include paper</label>
+          <div class="export-actions">
+            <button id="pngButton" type="button">PNG</button><button id="svgButton" type="button">SVG</button>
+          </div>
+          <a id="exportDownload" class="export-download" href="#" download hidden>Download ready file</a>
+          <div class="project-actions">
+            <button id="saveProjectButton" type="button">Save project</button>
+            <label class="file-button">Load project<input id="loadProjectInput" type="file" accept=".json,application/json" /></label>
+          </div>
+          <p id="exportNote">SVG contains an embedded raster image so every operator keeps its exact appearance.</p>
+        </form>
+      </dialog>
+
+      <div class="restore-ui" id="restoreUi" hidden><button type="button">Show controls</button></div>
+    </main>
+  </body>
+</html>
