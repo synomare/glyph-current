@@ -27,7 +27,15 @@ npm run build
 npm run preview
 ```
 
-`npm run build` creates the standalone `dist/` directory. Asset and worker URLs are relative, so the built site can be hosted below a URL subpath. Publishing is intentionally outside this repository workflow.
+`npm run build` creates the standalone `dist/` directory. Asset and worker URLs are relative, so the built site can be hosted below a URL subpath.
+
+## Publishing
+
+The public site is deployed from this repository with GitHub Pages:
+
+<https://synomare.github.io/glyph-current/>
+
+Every push to `main` runs the source tests and engine extraction check, builds the static site, and deploys the generated `dist/` artifact through `.github/workflows/pages.yml`. The compiled `dist/` directory is deliberately not committed.
 
 ## What is included
 
